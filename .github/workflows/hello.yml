@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+
 jobs:
-  hello: 
+  hello:
     runs-on: ubuntu-latest
+
     env:
       DEMO_SECRET: ${{ secrets.MY_DB_PASSWORD }}
 
@@ -14,10 +16,22 @@ jobs:
       - name: Check secret
         run: |
           if [ -n "$DEMO_SECRET" ]; then
-             echo "Secret is available"
+            echo "Secret is available"
           else
-             echo "Secret is NOT available"
-             exit 1
+            echo "Secret is NOT available"
+            exit 1
           fi
+
       - name: Say Hello
-        run: echo "Hello from GitHub Actions" 
+        run: echo "Hello from GitHub Actions"
+
+      - name: Create build file
+        run: |
+          echo "Hello from my CI pipeline" > hello.txt
+          echo "This file was created by GitHub Actions" >> hello.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-artifact
+          path: hello.txt
