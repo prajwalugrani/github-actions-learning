@@ -11,5 +11,13 @@ jobs:
       DEMO_SECRET: ${{ secrets.MY_DB_PASSWORD }}
 
     steps:
+      - name: Check secret
+        run: |
+          if [ -n "$DEMO_SECRET" ]; then
+             echo "Secret is available"
+          else
+             echo "Secret is NOT available"
+             exit 1
+          fi
       - name: Say Hello
         run: echo "Hello from GitHub Actions" 
