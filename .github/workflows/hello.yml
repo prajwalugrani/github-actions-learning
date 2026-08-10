@@ -8,7 +8,7 @@ jobs:
   hello: 
     runs-on: ubuntu-latest
     env:
-      DEMO_SECRET: ${{ secrets.MY_SECRET }}
+      DEMO_SECRET: ${{ secrets.MY_DB_PASSWORD }}
 
     steps:
       - name: Say Hello
